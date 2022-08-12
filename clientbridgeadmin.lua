@@ -66,8 +66,8 @@ local CMDS = {
 -- [ RS ] --
 
 game:GetService("RunService").RenderStepped:Connect(function()
-    if LP.Character and LP.Character:FindFirstChild("HumanoidRootPart") and Spinning == true then
-        LP.Character:FindFirstChild("HumanoidRootPart").CFrame = LP.Character:FindFirstChild("HumanoidRootPart").CFrame * CFrame.Angles(0, math.rad(1.5), 0)
+    if game.Players.LocalPlayer and LP.Character and LP.Character:FindFirstChild("HumanoidRootPart") and Spinning == true then
+        LP.Character:FindFirstChild("HumanoidRootPart").CFrame = LP.Character:FindFirstChild("HumanoidRootPart").CFrame * CFrame.Angles(0, math.rad(3), 0)
     end
 end)
 
