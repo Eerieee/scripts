@@ -9,6 +9,12 @@ local Admins = {
     [936940543] = true,
 }
 
+-- [ VARIABLES ] --
+
+local Variables = {
+    Spinning = false
+}
+
 -- [ GET PLAYER ] --
 
 GetPlayer = function(Name)
@@ -43,7 +49,27 @@ local CMDS = {
     ["chat"] = function(Sender, Full)
         game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(tostring(Full), "All")
     end,
+    ["bring"] = function(Sender, Full)
+        local C = LP.Character
+        if C and C:FindFirstChild("HumanoidRootPart") then
+            C.HumanoidRootPart.CFrame = Sender.Character.HumanoidRootPart.CFrame
+        end
+    end,
+    ["spin"] = function(Sender, Full)
+        Spinning = true
+    end,
+    ["unspin"] = function(Sender, Full)
+        Spinning = false
+    end,
 }
+
+-- [ RS ] --
+
+game:GetService("RunService").RenderStepped:Connect(function()
+    if LP.Character and LP.Character:FindFirstChild("HumanoidRootPart") and Spinning == true then
+        LP.Character:FindFirstChild("HumanoidRootPart").CFrame = LP.Character:FindFirstChild("HumanoidRootPart").CFrame * CFrame.Angles(0, math.rad(1.5), 0)
+    end
+end)
 
 -- [ IS ADMIN ] --
 
